@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - LawSphere</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">🌐 LAWSphere</div>
+
+        <div class="signin">
+            Already have an account?<br>
+            <a href="index.html">Sign in</a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+
+        <div class="heading">
+            <p class="small-title">JOIN LAWSPHERE</p>
+            <h1>Create your account</h1>
+            <p>Choose how you'll use LawSphere to get started.</p>
+        </div>
+
+        <!-- Account Type -->
+        <div class="account-types">
+
+            <button class="account active" onclick="selectRole('Client', this)">
+                <span class="icon">◎</span>
+                <span>
+                    <strong>Client</strong>
+                    <small>Find legal support</small>
+                </span>
+            </button>
+
+          <a href="lawyer-register.html" class="account">
+    <span class="icon">§</span>
+    <span>
+        <strong>Lawyer</strong>
+        <small>Grow your practice</small>
+    </span>
+</a>  
+
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-box">
+
+            <p class="small-title" id="roleTitle">CLIENT ACCOUNT</p>
+            <h2>Your details</h2>
+
+            <p class="required">* Required</p>
+
+            <form onsubmit="registerAccount(event)">
+
+                <label for="fullname">Full name <span>*</span></label>
+                <input type="text" id="fullname" required>
+
+                <div class="row">
+
+                    <div class="field">
+                        <label for="email">Email address <span>*</span></label>
+                        <input type="email" id="email"
+                               placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">Phone number <span>*</span></label>
+                        <input type="tel" id="phone"
+                               placeholder="+94 77 123 4567" required>
+                    </div>
+
+                </div>
+
+                <label for="password">Password <span>*</span></label>
+
+                <div class="password-box">
+                    <input type="password" id="password" required
+                           minlength="8">
+
+                    <button type="button" class="show"
+                            onclick="togglePassword()">
+                        Show
+                    </button>
+                </div>
+
+                <small class="hint">
+                    At least 8 characters, with at least one letter and one number.
+                </small>
+
+                <button type="submit" class="submit">
+                    Create client account →
+                </button>
+
+            </form>
+
+        </div>
+
+        <p class="terms">
+            By creating an account, you agree to our
+            <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a>.
+        </p>
+
+    </main>
+
+    <script>
+
+        let selectedRole = "Client";
+
+        function selectRole(role, button) {
+
+            selectedRole = role;
+
+            document.querySelectorAll(".account").forEach(function(item) {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            document.getElementById("roleTitle").textContent =
+                role.toUpperCase() + " ACCOUNT";
+
+            document.querySelector(".submit").textContent =
+                "Create " + role.toLowerCase() + " account →";
+        }
+
+        function togglePassword() {
+
+            const password = document.getElementById("password");
+            const button = document.querySelector(".show");
+
+            if (password.type === "password") {
+                password.type = "text";
+                button.textContent = "Hide";
+            } else {
+                password.type = "password";
+                button.textContent = "Show";
+            }
+        }
+
+        function registerAccount(event) {
+
+            event.preventDefault();
+
+            const password = document.getElementById("password").value;
+
+            if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
+                alert("Password must contain at least one letter and one number.");
+                return;
+            }
+
+            alert("Registration form completed! Selected role: " + selectedRole);
+        }
+
+    </script>
+
+</body>
+</html>

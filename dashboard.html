@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawSphere - Lawyer Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h2 class="logo">⚖ LAW<span>Sphere</span></h2>
+
+        <p class="menu-title">LAWYER PORTAL</p>
+
+        <a href="#" class="nav active">▦ &nbsp; Dashboard</a>
+        <a href="#" class="nav">▤ &nbsp; Consultation Requests</a>
+        <a href="#" class="nav">♧ &nbsp; My Consultations</a>
+        <a href="#" class="nav">♙ &nbsp; My Profile & Fees</a>
+        <a href="#" class="nav">▤ &nbsp; Earnings & Settlements</a>
+        <a href="#" class="nav">♧ &nbsp; Client Reviews</a>
+        <a href="#" class="nav">♧ &nbsp; Notifications <span class="notification">0</span></a>
+
+        <p class="menu-title account-title">ACCOUNT</p>
+        <a href="#" class="nav">⚙ &nbsp; Settings</a>
+
+        <div class="sidebar-profile">
+            <div class="avatar" id="sideAvatar">L</div>
+            <div class="profile-info">
+                <strong id="sideName">Lawyer Name</strong>
+                <small>Lawyer</small>
+            </div>
+        </div>
+
+        <a href="index.html" class="logout">↪ &nbsp; Logout</a>
+
+    </aside>
+
+
+    <!-- MAIN DASHBOARD -->
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h2 id="welcomeName">Welcome back, Lawyer!</h2>
+            </div>
+
+            <div class="top-account">
+                <span class="bell">♧</span>
+                <div class="avatar small-avatar" id="topAvatar">L</div>
+                <div class="top-user">
+                    <strong id="topName">Lawyer</strong>
+                    <small>Lawyer Account</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- BLUE SUMMARY BANNER -->
+        <section class="summary-banner">
+
+            <div>
+                <p class="eyebrow blue-text">CONSULTATION SUMMARY</p>
+                <h3>Your consultation overview</h3>
+                <p class="banner-description">
+                    Keep your schedule, client communication, and
+                    documentation moving smoothly.
+                </p>
+            </div>
+
+            <div class="banner-avatar" id="bannerAvatar">L</div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <p>TOTAL<br>CONSULTATIONS</p>
+                <h2>0</h2>
+                <small>Across all active matters</small>
+            </div>
+
+            <div class="stat-card">
+                <p>UPCOMING<br>CONSULTATIONS</p>
+                <h2>0</h2>
+                <small>Booked in the next 14 days</small>
+            </div>
+
+            <div class="stat-card">
+                <p>PENDING REQUESTS</p>
+                <h2>0</h2>
+                <small>Requiring review or response</small>
+            </div>
+
+            <div class="stat-card">
+                <p>COMPLETED<br>CONSULTATIONS</p>
+                <h2>0</h2>
+                <small>Closed and recorded</small>
+            </div>
+
+        </section>
+
+
+        <!-- MIDDLE SECTION -->
+        <section class="middle-grid">
+
+            <!-- UPCOMING CONSULTATIONS -->
+            <div class="panel consultations-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h3>Upcoming Consultations</h3>
+                        <p>Scheduled appointments for this week</p>
+                    </div>
+                    <a href="#">View all</a>
+                </div>
+
+                <div class="empty-state">
+                    <div class="empty-icon">▤</div>
+                    <h4>No upcoming consultations</h4>
+                    <p>Your scheduled appointments will appear here.</p>
+                </div>
+
+            </div>
+
+
+            <!-- NEW REQUESTS -->
+            <div class="panel requests-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h3>New Consultation Requests</h3>
+                        <p>Requests pending review</p>
+                    </div>
+                    <a href="#">Review queue</a>
+                </div>
+
+                <div class="empty-state">
+                    <div class="empty-icon">♧</div>
+                    <h4>No new requests</h4>
+                    <p>New client requests will appear here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BOTTOM SECTION -->
+        <section class="bottom-grid">
+
+            <!-- EARNINGS -->
+            <div class="panel earnings-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h3>Earnings Overview</h3>
+                        <p>Current cycle summary</p>
+                    </div>
+                    <a href="#">All earnings</a>
+                </div>
+
+                <div class="earning-row">
+                    <span>Gross consultation earnings</span>
+                    <strong>LKR 0.00</strong>
+                </div>
+
+                <div class="earning-row">
+                    <span>LawSphere commission (10%)</span>
+                    <strong>LKR 0.00</strong>
+                </div>
+
+                <div class="earning-row">
+                    <span>Net lawyer earnings</span>
+                    <strong>LKR 0.00</strong>
+                </div>
+
+                <div class="earning-row">
+                    <span>Pending settlement</span>
+                    <strong>LKR 0.00</strong>
+                </div>
+
+            </div>
+
+
+            <!-- RECENT ACTIVITY -->
+            <div class="panel activity-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h3>Recent Activity</h3>
+                        <p>Latest professional updates</p>
+                    </div>
+                </div>
+
+                <div class="empty-state activity-empty">
+                    <div class="empty-icon">◷</div>
+                    <h4>No recent activity</h4>
+                    <p>Your recent activities will appear here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- GET REGISTERED LAWYER NAME -->
+<script>
+    const lawyer = JSON.parse(localStorage.getItem("lawyer") || "null");
+
+    if (lawyer && lawyer.name) {
+
+        document.getElementById("welcomeName").textContent =
+            "Welcome back, " + lawyer.name + "!";
+
+        document.getElementById("sideName").textContent =
+            lawyer.name;
+
+        document.getElementById("topName").textContent =
+            lawyer.name;
+
+        const initial = lawyer.name.charAt(0).toUpperCase();
+
+        document.getElementById("sideAvatar").textContent = initial;
+        document.getElementById("topAvatar").textContent = initial;
+        document.getElementById("bannerAvatar").textContent = initial;
+    }
+</script>
+</body>
+</html>

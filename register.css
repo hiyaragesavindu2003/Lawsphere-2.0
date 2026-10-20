@@ -1,0 +1,289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fc;
+    color: #172a42;
+}
+
+/* Header */
+
+header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e1e7ef;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0755a5;
+}
+
+.signin {
+    font-size: 12px;
+    color: #718096;
+}
+
+.signin a {
+    color: #2864d8;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Main section */
+
+main {
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 0 15px;
+}
+
+/* Heading */
+
+.heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.small-title {
+    color: #3266db;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.heading h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.heading > p:last-child {
+    color: #778394;
+    font-size: 13px;
+}
+
+/* Account types */
+
+.account-types {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.account {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #dfe5ed;
+    border-radius: 7px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.account.active {
+    border: 1px solid #2864e8;
+    background: #f8fbff;
+}
+
+.icon {
+    background: #edf3ff;
+    color: #3266db;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 18px;
+}
+
+.account strong,
+.account small {
+    display: block;
+}
+
+.account strong {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.account small {
+    font-size: 11px;
+    color: #778394;
+}
+
+/* Form box */
+
+.form-box {
+    position: relative;
+    background: white;
+    padding: 25px;
+    border: 1px solid #e1e7ef;
+    border-radius: 9px;
+    box-shadow: 0 5px 20px #00000005;
+}
+
+.form-box h2 {
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.required {
+    position: absolute;
+    right: 25px;
+    top: 38px;
+    font-size: 10px;
+    color: #778394;
+}
+
+/* Input fields */
+
+label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+label span {
+    color: #d9534f;
+}
+
+input {
+    width: 100%;
+    height: 36px;
+    padding: 10px;
+    border: 1px solid #d9e0e8;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 17px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2864e8;
+}
+
+input::placeholder {
+    color: #a0a9b6;
+}
+
+/* Email and phone */
+
+.row {
+    display: flex;
+    gap: 14px;
+}
+
+.field {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Password */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 55px;
+}
+
+.show {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    border: none;
+    background: white;
+    color: #718096;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.hint {
+    display: block;
+    color: #778394;
+    font-size: 10px;
+    margin-top: -10px;
+    margin-bottom: 22px;
+}
+
+/* Submit button */
+
+.submit {
+    display: block;
+    margin-left: auto;
+    padding: 12px 17px;
+    background: #2864e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #174fc7;
+}
+
+/* Terms */
+
+.terms {
+    text-align: center;
+    color: #778394;
+    font-size: 10px;
+    margin-top: 18px;
+}
+
+.terms a {
+    color: #2864d8;
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    header {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    main {
+        margin-top: 25px;
+    }
+
+    .heading h1 {
+        font-size: 24px;
+    }
+
+    .account {
+        padding: 10px;
+        gap: 7px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-box {
+        padding: 20px;
+    }
+
+    .required {
+        right: 20px;
+    }
+}
