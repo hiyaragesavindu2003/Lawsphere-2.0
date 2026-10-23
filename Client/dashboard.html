@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawSphere Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="logo" href="#">⚖ <span>LAW<span>Sphere</span></span></a>
+    <small>WORKSPACE</small>
+    <nav>
+      <button class="active" data-action="Dashboard">▦ <span>Dashboard</span></button>
+      <button data-action="Find Lawyers">⌕ <span>Find Lawyers</span></button>
+      <button data-action="My Bookings">▣ <span>My Bookings</span></button>
+      <button data-action="Payments & Receipts">▤ <span>Payments & Receipts</span></button>
+      <button data-action="My Reviews">☆ <span>My Reviews</span></button>
+      <button data-action="Notifications">♧ <span>Notifications</span><b class="badge">3</b></button>
+    </nav>
+    <small>ACCOUNT</small>
+    <nav>
+      <button data-action="My Profile">♙ <span>My Profile</span></button>
+      <button data-action="Settings">⚙ <span>Settings</span></button>
+    </nav>
+    <footer><button data-action="Logout">↪ <span>Logout</span></button><p>LawSphere Client Portal · Prototype</p></footer>
+  </aside>
+
+  <main>
+    <header>
+      <button id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <button class="notification" data-action="Notifications" aria-label="3 notifications">♧<b class="badge">3</b></button>
+      <button class="profile" data-action="My Profile"><span class="avatar blue">NP</span><span><strong>Nimal Perera</strong><small>Client account</small></span><span>›</span></button>
+    </header>
+    <div class="content">
+      <section class="welcome"><h1>Welcome back, Nimal!</h1><p>Manage your legal consultations in one place.</p></section>
+
+      <section class="stats" aria-label="Consultation statistics">
+        <article class="stat"><span class="icon">▣</span><div><h2>8</h2><p>Total Consultations</p><small>Across all request statuses</small></div></article>
+        <article class="stat"><span class="icon green">◷</span><div><h2>2</h2><p>Upcoming Consultations</p><small>Agreed schedule</small></div></article>
+        <article class="stat"><span class="icon gold">♧</span><div><h2>2</h2><p>Pending Requests</p><small>Need your attention</small></div></article>
+        <article class="stat"><span class="icon purple">✓</span><div><h2>2</h2><p>Completed Consultations</p><small>Ready for your review</small></div></article>
+      </section>
+
+      <div class="columns">
+        <div>
+          <section class="card">
+            <div class="card-heading"><div><h2>Upcoming Appointments</h2><p>Your next scheduled sessions</p></div><button class="link" data-action="My Bookings">All bookings ›</button></div>
+            <div class="appointment"><div class="date">22<small>OCT</small></div><span class="avatar ochre">KJ</span><div class="details"><h3>Kasun Jayawardena</h3><p>Business & Corporate · Online</p></div><div class="schedule"><strong>9:00 AM</strong><span class="status">● Awaiting Payment</span></div></div>
+            <div class="appointment"><div class="date">19<small>OCT</small></div><span class="avatar teal">DS</span><div class="details"><h3>Dinithi Silva</h3><p>Labour & Employment · Online</p></div><div class="schedule"><strong>11:00 AM</strong><span class="status confirmed">● Confirmed</span></div></div>
+          </section>
+          <section class="card"><div class="card-heading"><div><h2>Quick Actions</h2><p>Pick up where you left off</p></div></div><div class="actions"><button data-action="Find Lawyers"><span>⌕</span>Find a lawyer</button><button data-action="My Bookings"><span>▣</span>Manage bookings</button><button data-action="Payments & Receipts"><span>▤</span>View payments</button><button data-action="My Profile"><span>♙</span>Edit profile</button></div></section>
+        </div>
+        <div>
+          <section class="card"><div class="card-heading"><div><h2>Recent Activity</h2><p>Updates to your consultations</p></div><button class="link" data-action="Notifications">See all ›</button></div><div class="activity"><span class="mini-icon">✓</span><div><p><strong>Consultation accepted</strong> by Dinithi Silva</p><small>Today, 9:42 AM</small></div></div><div class="activity"><span class="mini-icon">▣</span><div><p>An alternative time was proposed by Nisha Fernando</p><small>Yesterday, 4:18 PM</small></div></div><div class="activity"><span class="mini-icon">▤</span><div><p>Payment is ready for your agreed consultation</p><small>12 Oct, 11:05 AM</small></div></div></section>
+          <section class="card"><div class="card-heading"><div><h2>Recommended Lawyers</h2><p>Top-rated professionals for you</p></div><button class="link" data-action="Find Lawyers">Browse all ›</button></div><div class="lawyer"><span class="avatar blue">AP</span><div><h3>Amal Perera</h3><p>Family Law</p><small><span class="star">★</span> 4.9</small></div><strong class="price">LKR 8,500</strong></div><div class="lawyer"><span class="avatar rose">NF</span><div><h3>Nisha Fernando</h3><p>Property Law</p><small><span class="star">★</span> 4.8</small></div><strong class="price">LKR 7,000</strong></div></section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
