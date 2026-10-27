@@ -26,18 +26,16 @@ CREATE TABLE `appointment` (
   `appointmentId` int NOT NULL AUTO_INCREMENT,
   `mode` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `time` time DEFAULT NULL,
-  `date` date DEFAULT NULL,
   `clientId` int DEFAULT NULL,
   `lawyerId` int NOT NULL,
   `slotId` int NOT NULL,
   PRIMARY KEY (`appointmentId`),
   KEY `clientId` (`clientId`),
-  KEY `fk_slot` (`slotId`),
   KEY `fk_lawyer` (`lawyerId`),
+  KEY `fk_slot_idx` (`slotId`),
   CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`clientId`) REFERENCES `client` (`clientId`) ON DELETE CASCADE,
   CONSTRAINT `fk_lawyer` FOREIGN KEY (`lawyerId`) REFERENCES `lawyer` (`barCouncilId`) ON DELETE CASCADE,
-  CONSTRAINT `fk_slot` FOREIGN KEY (`slotId`) REFERENCES `availabilityslot` (`slotId`) ON DELETE CASCADE
+  CONSTRAINT `fk_slot` FOREIGN KEY (`slotId`) REFERENCES `availabilityslot` (`slotId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,6 +47,69 @@ LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `appointment_AFTER_INSERT` AFTER INSERT ON `appointment` FOR EACH ROW BEGIN
+	UPDATE availabilityslot
+    SET isBooked=1
+    WHERE slotId = NEW.slotId;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `appointment_AFTER_UPDATE` AFTER UPDATE ON `appointment` FOR EACH ROW BEGIN
+IF NEW.status = 'CANCELLED'
+       AND OLD.status <> 'CANCELLED' THEN
+
+        UPDATE availabilityslot
+        SET isBooked = 0
+        WHERE slotId = OLD.slotId;
+
+END IF;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `appointment_AFTER_DELETE` AFTER DELETE ON `appointment` FOR EACH ROW BEGIN
+UPDATE availabilityslot
+SET isBooked = 0
+WHERE slotId = OLD.slotId;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `availabilityslot`
@@ -65,7 +126,8 @@ CREATE TABLE `availabilityslot` (
   `isBooked` tinyint(1) DEFAULT '0',
   `lawyerId` int NOT NULL,
   PRIMARY KEY (`slotId`),
-  KEY `lawyerId` (`lawyerId`),
+  UNIQUE KEY `lawyerId_UNIQUE` (`lawyerId`),
+  UNIQUE KEY `slotId_UNIQUE` (`slotId`),
   CONSTRAINT `availabilityslot_ibfk_1` FOREIGN KEY (`lawyerId`) REFERENCES `lawyer` (`barCouncilId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -112,14 +174,13 @@ DROP TABLE IF EXISTS `lawyer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lawyer` (
   `barCouncilId` int NOT NULL,
-  `barLisenceNo` varchar(50) NOT NULL,
+  `barLicenseNo` varchar(50) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `dateOfBirth` date DEFAULT NULL,
-  `age` int DEFAULT NULL,
-  `feePerHour` varchar(50) NOT NULL,
+  `feePerHour` decimal(10,2) NOT NULL,
   `city` varchar(50) DEFAULT NULL,
   `district` varchar(50) DEFAULT NULL,
-  `specialization` enum('CIVIL LAW','CRIMINAL LAW','FAMILY LAW','COPERATE LAW','PROPERTY LAW','LABOUR LAW','IMMIGRATION LAW','INTERLECTUAL PROPERTY','OTHER') NOT NULL DEFAULT 'CIVIL LAW',
+  `specialization` enum('CIVIL LAW','CRIMINAL LAW','FAMILY LAW','CORPORATE LAW','PROPERTY LAW','LABOUR LAW','IMMIGRATION LAW','INTELLECTUAL PROPERTY','OTHER') NOT NULL DEFAULT 'CIVIL LAW',
   PRIMARY KEY (`barCouncilId`),
   CONSTRAINT `lawyer_ibfk_1` FOREIGN KEY (`barCouncilId`) REFERENCES `user` (`userId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -169,7 +230,7 @@ DROP TABLE IF EXISTS `review`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `review` (
   `reviewId` int NOT NULL AUTO_INCREMENT,
-  `comment` varchar(100) NOT NULL,
+  `comment` varchar(1000) NOT NULL,
   `rating` int NOT NULL,
   `reviewDate` date NOT NULL,
   `lawyerId` int NOT NULL,
@@ -203,8 +264,8 @@ CREATE TABLE `user` (
   `fullName` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(500) NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `phoneNumber` varchar(10) DEFAULT NULL,
+  `role` enum('ADMIN','CLIENT','LAWYER') NOT NULL DEFAULT 'ADMIN',
+  `phoneNumber` varchar(15) NOT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -228,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-24 13:57:26
+-- Dump completed on 2026-10-28  0:26:42
