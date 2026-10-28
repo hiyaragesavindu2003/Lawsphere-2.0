@@ -316,8 +316,7 @@ button[type="submit"]:hover {
     .role {
         padding: 10px;
     }
-}
-.logo {
+}.logo {
 display: flex;
 align-items: center;
 justify-content: center;
