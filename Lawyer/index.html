@@ -11,10 +11,12 @@
 
         <!-- Left Side -->
         <div class="left">
-          <div class="logo">
+        <div class="logo">
     <img src="C:\Users\User\Downloads\WhatsApp Image 2026-10-26 at 6.20.16 PM.jpeg" alt="LawSphere Logo">
-</div>  
-            <p class="tagline">A CLEARER PATH TO LEGAL SUPPORT</p>
+</div>
+   
+    
+    <p class="tagline">A CLEARER PATH TO LEGAL SUPPORT</p>
 
             <h1>
                 Confident decisions start with the right counsel.
@@ -39,10 +41,10 @@
                     Enter your details to continue to LawSphere.
                 </p>
 
-                <form>
+                <form id="loginForm">
 
-                    <label>Username</label>
-                    <input type="text" placeholder="Enter your username" required>
+                  <label>User Name</label>
+<input type="email" placeholder="Enter your email" required> 
 
                     <label>Password</label>
                     <input type="password" placeholder="Enter your password" required>
@@ -52,7 +54,6 @@
                     <select>
                         <option>Client</option>
                         <option>Lawyer</option>
-                        
                     </select>
 
                     <button type="submit">Sign in →</button>
@@ -69,6 +70,35 @@
         </div>
 
     </div>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const email = document.querySelector('input[type="email"]').value.trim().toLowerCase();
+    const password = document.querySelector('input[type="password"]').value;
+    const role = document.querySelector("select").value;
+
+    if (role === "Lawyer") {
+
+        const lawyer = JSON.parse(localStorage.getItem("lawyer") || "null");
+
+        if (
+            lawyer &&
+            lawyer.email === email &&
+            lawyer.password === password
+        ) {
+            window.location.href = "./dashboard.html";
+
+        } else {
+            alert("Incorrect email or password!");
+        }
+
+    } else {
+        alert("Client login is not available yet.");
+    }
+});
+</script>
+
 
 </body>
 </html>
