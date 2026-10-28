@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lawyer Registration - LawSphere</title>
     <link rel="stylesheet" href="lawyer.css">
-    <script src="js/lawyer-register.js" defer></script>
 </head>
 
 <body>
@@ -13,7 +12,7 @@
 <header>
    <div class="logo">
     <img src="C:\Users\User\Downloads\WhatsApp Image 2026-10-26 at 6.20.16 PM.jpeg" alt="LawSphere Logo">
-</div> 
+</div>
     <div class="signin">
         Already have an account?<br>
         <a href="index.html">Sign in</a>
@@ -182,7 +181,12 @@
         <h3>04 &nbsp; Account security</h3>
 
         <label>Password *</label>
-        <input type="password" minlength="8" placeholder="Create a password" required>
+        <input
+    type="password"
+    id="password"
+    placeholder="Create a password"
+    required
+>
 
         <small class="hint">
             At least 8 characters, with at least one letter and one number.
@@ -221,6 +225,7 @@
       <button type="submit">
     Submit Lawyer Application →
 </button>
+
     </form>
 
     <p class="terms">
@@ -230,7 +235,34 @@
     </p>
 
 </main>
+<script>
+document.getElementById("lawyerForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("LawyerEmail").value.trim().toLowerCase();
+    const password = document.getElementById("password").value;
+
+    if (!firstName || !lastName || !email || !password) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    const lawyer = {
+        name: firstName + " " + lastName,
+        email: email,
+        username: email,
+        password: password
+    };
+
+    localStorage.setItem("lawyer", JSON.stringify(lawyer));
+
+    alert("Lawyer account created successfully!");
+
+    window.location.href = "./dashboard.html";
+});
+</script>
 
 </body>
 </html>
