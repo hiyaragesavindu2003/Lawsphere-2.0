@@ -286,8 +286,7 @@ input::placeholder {
     .required {
         right: 20px;
     }
-}
-.logo {
+}.logo {
 display: flex;
 align-items: center;
 justify-content: center;
