@@ -11,9 +11,10 @@
 
     <!-- Header -->
     <header>
-       <div class="logo">
+      <div class="logo">
     <img src="C:\Users\User\Downloads\WhatsApp Image 2026-10-26 at 6.20.16 PM.jpeg" alt="LawSphere Logo">
 </div>
+ 
 
         <div class="signin">
             Already have an account?<br>
@@ -113,55 +114,71 @@
     </main>
 
     <script>
+    let selectedRole = "Client";
 
-        let selectedRole = "Client";
+    function selectRole(role, button) {
+        selectedRole = role;
 
-        function selectRole(role, button) {
+        document.querySelectorAll(".account").forEach(function(item) {
+            item.classList.remove("active");
+        });
 
-            selectedRole = role;
+        button.classList.add("active");
 
-            document.querySelectorAll(".account").forEach(function(item) {
-                item.classList.remove("active");
-            });
+        document.getElementById("roleTitle").textContent =
+            role.toUpperCase() + " ACCOUNT";
 
-            button.classList.add("active");
+        document.querySelector(".submit").textContent =
+            "Create " + role.toLowerCase() + " account →";
+    }
 
-            document.getElementById("roleTitle").textContent =
-                role.toUpperCase() + " ACCOUNT";
+    function togglePassword() {
+        const password = document.getElementById("password");
+        const button = document.querySelector(".show");
 
-            document.querySelector(".submit").textContent =
-                "Create " + role.toLowerCase() + " account →";
+        if (password.type === "password") {
+            password.type = "text";
+            button.textContent = "Hide";
+        } else {
+            password.type = "password";
+            button.textContent = "Show";
+        }
+    }
+
+    function registerAccount(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
+            alert("Password must contain at least one letter and one number.");
+            return;
         }
 
-        function togglePassword() {
+        const account = {
+            name: name,
+            username: email,
+            email: email,
+            phone: phone,
+            password: password,
+            role: selectedRole
+        };
 
-            const password = document.getElementById("password");
-            const button = document.querySelector(".show");
-
-            if (password.type === "password") {
-                password.type = "text";
-                button.textContent = "Hide";
-            } else {
-                password.type = "password";
-                button.textContent = "Show";
-            }
+        if (selectedRole === "Lawyer") {
+            localStorage.setItem("lawyer", JSON.stringify(account));
+        } else {
+            localStorage.setItem("client", JSON.stringify(account));
         }
 
-        function registerAccount(event) {
+        alert("Account created successfully!");
 
-            event.preventDefault();
+        window.location.href = "index.html";
+    }
+</script>
 
-            const password = document.getElementById("password").value;
-
-            if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
-                alert("Password must contain at least one letter and one number.");
-                return;
-            }
-
-            alert("Registration form completed! Selected role: " + selectedRole);
-        }
-
-    </script>
 
 </body>
 </html>
