@@ -287,3 +287,16 @@ input::placeholder {
         right: 20px;
     }
 }
+.logo {
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 30px;
+}
+
+.logo img {
+width: 200px;
+max-width: 100%;
+height: auto;
+display: block;
+}
